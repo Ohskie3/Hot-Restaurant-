@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    h1 {
+        color: red;
+    }
+</style>
+
+<body>
+
+    <a href="/users.html">Go to users</a>
+
+    <h1>Make a reservation</h1>
+    <form>
+        <p>
+            <label for="name">Name</label>
+            <input type="text" id="username">
+        </p>
+        <p>
+            <label for="email">Email</label>
+            <input type="text" id="email">
+        </p>
+        <p>
+            <label for="id">ID</label>
+            <input type="text" id="password">
+        </p>
+        <p>
+            <label for="phone">Phone</label>
+            <input type="text" id="phone">
+        </p>
+        
+        <button id="submit">Register</button>
+    </form>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous"></script>
+    <script>
+
+        // On button click
+        document.getElementById("submit").addEventListener("click", (event) => {
+            event.preventDefault()
+
+            // Get all the value from each input
+            let username = document.getElementById("name").value
+            let email = document.getElementById("email").value
+            let phone = document.getElementById("phone").value
+            let id = document.getElementById("id").value
+
+            // Create a new object from that value. An object that matches the object to create a new user.
+            let newUser = {
+                name: name,
+                email: email,
+                id: id,
+                phone: phone
+                
+            }
+
+            // Make a POST request to the API to create a new user using the route /api/user and sending the BODY as newUser
+            axios.post('/api/user', newUser)
+                .then((res) => {
+                    console.log(res)
+
+                    document.getElementById("username").value = ''
+                    document.getElementById("email").value = ''
+                    document.getElementById("phone").value = ''
+                    document.getElementById("id").value = ''
+                })
+                .catch(err => console.error(err))
+        })
+
+
+    </script>
+</body>
+
+</html>
